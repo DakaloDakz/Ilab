@@ -1,0 +1,34 @@
+1.SELECT * FROM Employees order by LastName;
+2.SELECT * FROM Suppliers WHERE Country='France' and City NOT LIKE 'p%'
+3.SELECT * FROM Suppliers WHERE SupplierName LIKE 'N%';
+4.SELECT DISTINCT Country FROM Customers;
+5.SELECT OrderID,OrderDate,CustomerName
+FROM Orders
+LEFT JOIN Customers
+ON Orders.CustomerID
+=
+Customers.CustomerID
+where OrderDate > '1996-12-31'
+;
+6.SELECT o.OrderID,p.ProductID, (Quantity
+* Price) AS Sales
+FROM OrderDetails o,Products p
+where o.ProductID=p.ProductID
+;
+7.SELECT o.OrderID, SUM((Quantity
+* Price)) AS Sales
+FROM OrderDetails o,Products p
+where o.ProductID=p.ProductID
+group by OrderID
+8.SELECT OrderID, Sales from (
+SELECT o.OrderID, SUM((Quantity
+* Price)) AS Sales
+FROM OrderDetails o,Products p
+where o.ProductID=p.ProductID
+group by OrderID ) WHERE sales > 10000
+9.SELECT T.OrderID FROM OrderDetails  T ,(SELECT OrderID  FROM [OrderDetails] where ProductID = 19) F
+WHERE T.OrderID = F.OrderID AND T.ProductID = 35
+10.SELECT E.EmployeeID, count(O.OrderID) As Orders FROM Employees E
+left Join Orders O
+ON E.EmployeeID = O.EmployeeID 
+GROUP BY E.EmployeeID 
